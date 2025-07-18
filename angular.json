@@ -1,0 +1,168 @@
+{
+  "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
+  "version": 1,
+  "newProjectRoot": "projects",
+  "projects": {
+    "aula-anime": {
+      "projectType": "application",
+      "schematics": {
+        "@schematics/angular:component": {
+          "style": "scss"
+        }
+      },
+      "root": "apps/aula-anime",
+      "sourceRoot": "apps/aula-anime/src",
+      "prefix": "app",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:browser",
+          "options": {
+            "outputPath": "dist/apps/aula-anime",
+            "index": "apps/aula-anime/src/index.html",
+            "main": "apps/aula-anime/src/main.ts",
+            "polyfills": "apps/aula-anime/src/polyfills.ts",
+            "tsConfig": "apps/aula-anime/tsconfig.app.json",
+            "assets": [
+              "apps/aula-anime/src/favicon.ico",
+              "apps/aula-anime/src/assets"
+            ],
+            "styles": [
+              "apps/aula-anime/src/styles.scss"
+            ],
+            "scripts": []
+          }
+        },
+        "serve": {
+          "builder": "@angular-devkit/build-angular:dev-server",
+          "options": {
+            "port": 4200
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "apps/aula-anime/src/test.ts",
+            "polyfills": "apps/aula-anime/src/polyfills.ts",
+            "tsConfig": "apps/aula-anime/tsconfig.spec.json"
+          }
+        }
+      }
+    },
+    "galeria-gatos": {
+      "projectType": "application",
+      "schematics": {
+        "@schematics/angular:component": {
+          "style": "scss"
+        }
+      },
+      "root": "apps/galeria-gatos",
+      "sourceRoot": "apps/galeria-gatos/src",
+      "prefix": "app",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:browser",
+          "options": {
+            "outputPath": "dist/apps/galeria-gatos",
+            "index": "apps/galeria-gatos/src/index.html",
+            "main": "apps/galeria-gatos/src/main.ts",
+            "polyfills": "apps/galeria-gatos/src/polyfills.ts",
+            "tsConfig": "apps/galeria-gatos/tsconfig.app.json"
+          }
+        },
+        "serve": {
+          "builder": "@angular-devkit/build-angular:dev-server",
+          "options": {
+            "port": 4201
+          }
+        }
+      }
+    },
+    "dashboard-minecraft": {
+      "projectType": "application",
+      "schematics": {
+        "@schematics/angular:component": {
+          "style": "scss"
+        }
+      },
+      "root": "apps/dashboard-minecraft",
+      "sourceRoot": "apps/dashboard-minecraft/src",
+      "prefix": "app",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:browser",
+          "options": {
+            "outputPath": "dist/apps/dashboard-minecraft",
+            "index": "apps/dashboard-minecraft/src/index.html",
+            "main": "apps/dashboard-minecraft/src/main.ts",
+            "polyfills": "apps/dashboard-minecraft/src/polyfills.ts",
+            "tsConfig": "apps/dashboard-minecraft/tsconfig.app.json"
+          }
+        },
+        "serve": {
+          "builder": "@angular-devkit/build-angular:dev-server",
+          "options": {
+            "port": 4202
+          }
+        }
+      }
+    },
+    "painel-flyff": {
+      "projectType": "application",
+      "schematics": {
+        "@schematics/angular:component": {
+          "style": "scss"
+        }
+      },
+      "root": "apps/painel-flyff",
+      "sourceRoot": "apps/painel-flyff/src",
+      "prefix": "app",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:browser",
+          "options": {
+            "outputPath": "dist/apps/painel-flyff",
+            "index": "apps/painel-flyff/src/index.html",
+            "main": "apps/painel-flyff/src/main.ts",
+            "polyfills": "apps/painel-flyff/src/polyfills.ts",
+            "tsConfig": "apps/painel-flyff/tsconfig.app.json"
+          }
+        },
+        "serve": {
+          "builder": "@angular-devkit/build-angular:dev-server",
+          "options": {
+            "port": 4203
+          }
+        }
+      }
+    },
+    "shell-app": {
+      "projectType": "application",
+      "schematics": {
+        "@schematics/angular:component": {
+          "style": "scss"
+        }
+      },
+      "root": "apps/shell-app",
+      "sourceRoot": "apps/shell-app/src",
+      "prefix": "app",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:browser",
+          "options": {
+            "outputPath": "dist/apps/shell-app",
+            "index": "apps/shell-app/src/index.html",
+            "main": "apps/shell-app/src/main.ts",
+            "polyfills": "apps/shell-app/src/polyfills.ts",
+            "tsConfig": "apps/shell-app/tsconfig.app.json"
+          }
+        },
+        "serve": {
+          "builder": "@angular-devkit/build-angular:dev-server",
+          "options": {
+            "port": 4204
+          }
+        }
+      }
+    }
+  }
+}
