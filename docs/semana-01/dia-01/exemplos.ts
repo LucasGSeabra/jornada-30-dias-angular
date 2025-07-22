@@ -1,320 +1,250 @@
 /**
- * @fileoverview Exemplos práticos do Dia 01 - Derrote o Boss Any!
- * @description Código TypeScript correspondente à documentação
+ * @fileoverview Template de Exercícios do Dia 01 - Derrote o Boss Any!
+ * @description Arquivo para os alunos implementarem os conceitos de TypeScript Básico
  *
  * 📋 INSTRUÇÕES:
- * 1. Este arquivo contém exemplos dos conceitos aprendidos
- * 2. Para os exercícios práticos, consulte: exercicios.md
+ * 1. Complete os exercícios marcados com "// TODO:"
+ * 2. Consulte o arquivo "exercicios.md" para as instruções detalhadas
  * 3. Execute este arquivo com:
  *    🚀 FÁCIL: npm run exemplos:dia01 (na raiz do projeto)
- * 4. Use este arquivo como base para seus exercícios!
+ * 4. Use o arquivo "derrote-o-boss-any.md" como referência teórica
  */
 
 /* eslint-disable @typescript-eslint/no-unused-vars */
-/* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable prefer-const */
 /* eslint-disable @typescript-eslint/no-inferrable-types */
 
-// Criando namespace para isolar o código
 // =============================================================================
-// 🟦 TIPOS BÁSICOS
-// =============================================================================
-
-let nome: string = 'Anna';
-let idade: number = 30;
-let ativo: boolean = true;
-
-// =============================================================================
-// 🔍 TYPE ANNOTATION VS INFERENCE
+// 🟦 TIPOS BÁSICOS (EXEMPLO FORNECIDO)
 // =============================================================================
 
-// Type Annotation (Explícito)
-let pontos: number = 10;
-let nomeHeroi: string = 'Aragorn';
-let vivo: boolean = true;
-
-// Type Inference (Automático)
-let pontosInferidos = 10; // TS infere number
-let nomeHeroiInferido = 'Aragorn'; // TS infere string
-let vivoInferido = true; // TS infere boolean
+// Exemplo de como declarar variáveis com tipos básicos
+let nomeExemplo: string = 'Anna';
+let idadeExemplo: number = 30;
+let ativoExemplo: boolean = true;
 
 // =============================================================================
-// ⚠️ ANY vs UNKNOWN
+// 🏋️ EXERCÍCIOS NÍVEL INICIANTE
 // =============================================================================
 
-// ❌ PERIGOSO - Evite any
-let dadosUsuario: any = 'texto';
-dadosUsuario = 123;
-// dadosUsuario.metodoQueNaoExiste(); // compila mas quebra em runtime
+// TODO: Exercício 1 - Tipos Básicos
+// Declare as seguintes variáveis com tipos explícitos:
+// - nomeJogador (string) com seu nome
+// - pontosVida (number) iniciando com 100
+// - temEscudo (boolean) iniciando como false
 
-// ✅ SEGURO - Use unknown
-let dadosDesconhecidos: unknown = 'algum valor';
+// TODO: Exercício 2 - Type Annotation vs Inference
+// Crie duas versões das mesmas variáveis:
+// Version A: Com type annotation explícita
+// let nivelA: number = 1;
 
-if (typeof dadosDesconhecidos === 'string') {
-  console.log(dadosDesconhecidos.toUpperCase());
-}
-
-// =============================================================================
-// 🔑 UNION & LITERAL TYPES
-// =============================================================================
-
-// Union Types
-let id: string | number = 'user123';
-id = 456;
-
-function processarId(id: string | number): void {
-  if (typeof id === 'string') {
-    console.log(`ID string: ${id.toUpperCase()}`);
-  } else {
-    console.log(`ID numérico: ${id * 2}`);
-  }
-}
-
-// Literal Types
-type Status = 'ativo' | 'inativo' | 'morto';
-type Direcao = 'norte' | 'sul' | 'leste' | 'oeste';
-
-let statusPersonagem: Status = 'ativo';
-// statusPersonagem = 'fugindo'; // ❌ Erro de compilação
+// Version B: Com type inference (sem tipo explícito)
+// let nivelB = 1;
 
 // =============================================================================
-// 🛡️ TYPE ALIAS VS INTERFACE
+// ⚠️ ANY vs UNKNOWN - EXERCÍCIOS
 // =============================================================================
 
-// Type Alias - Exemplos Práticos
-type Guerreiro = {
-  nome: string;
-  arma: string;
-  classe: 'arqueiro' | 'mago' | 'guerreiro';
-};
+// TODO: Exercício 3 - Problema com ANY
+// 1. Declare uma variável 'dadosPerigosos' do tipo any
+// 2. Atribua qualquer valor a ela
+// 3. Tente chamar um método que não existe (para ver o problema)
 
-type ID = string | number;
-type StatusJogo = 'pausado' | 'jogando' | 'game-over';
-
-// ✨ Type Alias para Funções
-type CalculadoraDano = (ataque: number, defesa: number) => number;
-type ValidadorEmail = (email: string) => boolean;
-type ProcessadorId = (id: string | number) => void;
-
-// ✨ Type Alias para Objetos Complexos
-type Configuracao = {
-  tema: 'claro' | 'escuro';
-  idioma: 'pt' | 'en' | 'es';
-  notificacoes: boolean;
-  volume?: number; // opcional
-};
-
-type RespostaAPI = {
-  sucesso: boolean;
-  dados: unknown;
-  erro?: string;
-};
-
-// ✨ Type Alias com Union Types
-type TipoUsuario = 'admin' | 'moderador' | 'usuario';
-type StatusConexao = 'conectado' | 'desconectado' | 'conectando';
-type Prioridade = 'baixa' | 'media' | 'alta' | 'critica';
-
-// ✨ Type Alias com Intersection (combinando tipos)
-type TempoCarimbo = {
-  criadoEm: Date;
-  atualizadoEm: Date;
-};
-
-type Usuario = {
-  id: number;
-  nome: string;
-  email: string;
-} & TempoCarimbo; // Combina com TempoCarimbo
-
-// ✨ Exemplos de uso dos Type Alias
-const calcularDanoSimples: CalculadoraDano = (ataque, defesa) => {
-  return Math.max(0, ataque - defesa);
-};
-
-const validarEmailSimples: ValidadorEmail = (email) => {
-  return email.includes('@') && email.includes('.');
-};
-
-const config: Configuracao = {
-  tema: 'escuro',
-  idioma: 'pt',
-  notificacoes: true,
-  volume: 80,
-};
-
-const usuarioCompleto: Usuario = {
-  id: 1,
-  nome: 'João',
-  email: 'joao@teste.com',
-  criadoEm: new Date(),
-  atualizadoEm: new Date(),
-};
-
-// Interface
-interface IGuerreiro {
-  nome: string;
-  arma: string;
-}
-
-interface IGuerreiroAvancado extends IGuerreiro {
-  nivel: number;
-  habilidades: string[];
-  experiencia: number;
-}
+// TODO: Exercício 4 - Solução com UNKNOWN  
+// 1. Declare uma variável 'dadosSeguro' do tipo unknown
+// 2. Atribua uma string a ela
+// 3. Use type guard para verificar se é string antes de usar métodos de string
+// Exemplo:
+// if (typeof dadosSeguro === 'string') {
+//   console.log(dadosSeguro.toUpperCase());
+// }
 
 // =============================================================================
-// 🧩 PROPRIEDADES ESPECIAIS
+// 🔑 UNION & LITERAL TYPES - EXERCÍCIOS
 // =============================================================================
 
-// Optional Properties
-interface Personagem {
-  nome: string;
-  classe?: string; // opcional
-  vida: number;
-  mana?: number; // opcional
-  id?: number; // opcional
-  ativo?: boolean; // opcional
-}
+// TODO: Exercício 5 - Union Types
+// 1. Crie uma variável 'identificador' que pode ser string ou number
+// 2. Atribua primeiro um valor string, depois um número
+// 3. Crie uma função 'processarIdentificador' que aceita string|number
+//    e usa type guards para tratar cada tipo diferente
 
-const heroi: Personagem = {
-  nome: 'Legolas',
-  vida: 100,
-  id: 1,
-  ativo: true,
-};
-
-// Readonly Properties
-interface PersonagemImutavel {
-  readonly id: number;
-  readonly criadoEm: Date;
-  nome: string;
-}
-
-const personagem: PersonagemImutavel = {
-  id: 1,
-  criadoEm: new Date(),
-  nome: 'Gandalf',
-};
-
-// personagem.id = 2; // ❌ Erro - readonly
-personagem.nome = 'Gandalf, o Cinzento'; // ✅ OK
+// TODO: Exercício 6 - Literal Types
+// 1. Crie um type 'EstadoJogo' com os valores: 'menu', 'jogando', 'pausado', 'game-over'
+// 2. Crie um type 'DirecaoMovimento' com: 'cima', 'baixo', 'esquerda', 'direita'
+// 3. Declare variáveis usando esses tipos
 
 // =============================================================================
-// 🎯 ENUMS
+// 🛡️ TYPE ALIAS - EXERCÍCIOS
 // =============================================================================
 
-// Enum Numérico
-enum ClasseNumerica {
-  Arqueiro, // 0
-  Mago, // 1
-  Guerreiro, // 2
-}
+// TODO: Exercício 7 - Type Alias Básico
+// Crie os seguintes type aliases:
+// type NomeUsuario = string;
+// type IdadeUsuario = number;
+// type EmailUsuario = string;
 
-// Enum String (Recomendado)
-enum ClasseString {
-  Arqueiro = 'ARQUEIRO',
-  Mago = 'MAGO',
-  Guerreiro = 'GUERREIRO',
-}
+// TODO: Exercício 8 - Type Alias para Objetos
+// Crie um type alias 'Heroi' com:
+// - nome: string
+// - classe: 'guerreiro' | 'mago' | 'arqueiro'
+// - nivel: number
+// - experiencia: number
 
-// =============================================================================
-// 🧙 EXEMPLO PRÁTICO: SISTEMA RTS
-// =============================================================================
+// TODO: Exercício 9 - Type Alias para Funções
+// Crie os seguintes type aliases para funções:
+// type CalcularDano = (ataque: number, defesa: number) => number;
+// type ValidarSenha = (senha: string) => boolean;
 
-interface PersonagemRTS {
-  /** Nome do personagem */
-  nome: string;
-  /** Classe do personagem */
-  classe: 'arqueiro' | 'mago' | 'guerreiro';
-  /** Pontos de vida do personagem */
-  vida: number;
-  /** Poder de ataque */
-  ataque: number;
-  /** Defesa opcional (padrão 0) */
-  defesa?: number;
-  /** ID único e imutável */
-  readonly id: number;
-}
+// TODO: Exercício 10 - Implementar as Funções
+// Implemente as funções usando os type aliases criados acima:
+// const calcularDanoReal: CalcularDano = (ataque, defesa) => {
+//   // TODO: retorne ataque - defesa, mas nunca menos que 0
+// };
 
-/**
- * Calcula o dano efetivo de um personagem
- */
-function calcularDano(personagem: PersonagemRTS): number {
-  return personagem.ataque - (personagem.defesa ?? 0);
-}
-
-/**
- * Cria um personagem com valores padrão
- */
-function criarPersonagem(
-  nome: string,
-  classe: PersonagemRTS['classe']
-): PersonagemRTS {
-  const statsBase = {
-    arqueiro: { vida: 80, ataque: 90, defesa: 20 },
-    mago: { vida: 60, ataque: 100, defesa: 10 },
-    guerreiro: { vida: 120, ataque: 70, defesa: 40 },
-  };
-
-  return {
-    id: Math.floor(Math.random() * 1000),
-    nome,
-    classe,
-    ...statsBase[classe],
-  };
-}
-
-/**
- * Verifica se personagem está vivo
- */
-function estaVivo(personagem: PersonagemRTS): boolean {
-  return personagem.vida > 0;
-}
-
-/**
- * Simula uma batalha entre dois personagens
- */
-function simularBatalha(
-  atacante: PersonagemRTS,
-  defensor: PersonagemRTS
-): string {
-  const dano = calcularDano(atacante);
-  defensor.vida -= dano;
-
-  if (estaVivo(defensor)) {
-    return `${atacante.nome} causou ${dano} de dano em ${defensor.nome}`;
-  } else {
-    return `${atacante.nome} derrotou ${defensor.nome}!`;
-  }
-}
+// const validarSenhaReal: ValidarSenha = (senha) => {
+//   // TODO: retorne true se senha tem pelo menos 6 caracteres
+// };
 
 // =============================================================================
-// 🎮 EXEMPLOS DE USO
+// 🎯 INTERFACE - EXERCÍCIOS
 // =============================================================================
 
-// Criando personagens
-const legolas = criarPersonagem('Legolas', 'arqueiro');
-const gandalf = criarPersonagem('Gandalf', 'mago');
-const aragorn = criarPersonagem('Aragorn', 'guerreiro');
+// TODO: Exercício 11 - Interface Básica
+// Crie uma interface 'Jogador' com:
+// - nome: string
+// - nivel: number
+// - classe: string
+// - ativo: boolean
 
-// Calculando dano
-const danoLegolas = calcularDano(legolas);
-const danoGandalf = calcularDano(gandalf);
-const danoAragorn = calcularDano(aragorn);
+// TODO: Exercício 12 - Interface com Propriedades Opcionais
+// Crie uma interface 'Personagem' com:
+// - nome: string (obrigatório)
+// - vida: number (obrigatório)
+// - mana?: number (opcional)
+// - inventario?: string[] (opcional)
 
-// Exibindo informações
-console.log(`${legolas.nome} causa ${danoLegolas} de dano`);
-console.log(`${gandalf.nome} causa ${danoGandalf} de dano`);
-console.log(`${aragorn.nome} causa ${danoAragorn} de dano`);
+// TODO: Exercício 13 - Interface com Readonly
+// Crie uma interface 'Configuracao' com:
+// - readonly id: number
+// - readonly criadoEm: Date
+// - tema: string
+// - idioma: string
 
-// Simulando batalhas
-console.log(simularBatalha(legolas, gandalf));
-console.log(simularBatalha(aragorn, legolas));
+// TODO: Exercício 14 - Herança de Interface
+// Crie uma interface 'PersonagemAvancado' que estende 'Personagem' e adiciona:
+// - habilidades: string[]
+// - experiencia: number
 
-// Testando diferentes funcionalidades
-processarId('user123');
-processarId(456);
+// =============================================================================
+// 🎯 ENUMS - EXERCÍCIOS
+// =============================================================================
 
-console.log(`Status do personagem: ${statusPersonagem}`);
-console.log(`Classe escolhida: ${ClasseString.Arqueiro}`);
+// TODO: Exercício 15 - Enum String
+// Crie um enum 'TipoArma' com valores string:
+// - ESPADA = 'espada'
+// - ARCO = 'arco'  
+// - CAJADO = 'cajado'
+// - MACHADO = 'machado'
+
+// TODO: Exercício 16 - Enum Numérico
+// Crie um enum 'Dificuldade' com valores numéricos:
+// - FACIL = 1
+// - MEDIO = 2
+// - DIFICIL = 3
+// - EXPERT = 4
+
+// =============================================================================
+// 🧙 PROJETO PRÁTICO - SISTEMA RPG
+// =============================================================================
+
+// TODO: Exercício 17 - Interface Completa para RPG
+// Crie uma interface 'PersonagemRPG' que combine todos os conceitos:
+// interface PersonagemRPG {
+//   readonly id: number;
+//   nome: string;
+//   classe: 'guerreiro' | 'mago' | 'arqueiro';
+//   nivel: number;
+//   vida: number;
+//   mana?: number;
+//   arma: TipoArma; // use o enum criado
+//   experiencia: number;
+//   ativo: boolean;
+// }
+
+// TODO: Exercício 18 - Função de Criação
+// Implemente uma função que cria personagens:
+// function criarPersonagemRPG(
+//   nome: string,
+//   classe: PersonagemRPG['classe']
+// ): PersonagemRPG {
+//   // TODO: retorne um objeto PersonagemRPG com:
+//   // - id aleatório (Math.floor(Math.random() * 1000))
+//   // - nome recebido por parâmetro
+//   // - classe recebida por parâmetro  
+//   // - nivel: 1
+//   // - vida: 100
+//   // - mana: 50 (se for mago), undefined (se não for)
+//   // - arma: ESPADA (se guerreiro), ARCO (se arqueiro), CAJADO (se mago)
+//   // - experiencia: 0
+//   // - ativo: true
+// }
+
+// TODO: Exercício 19 - Funções Utilitárias
+// Implemente as seguintes funções:
+
+// function calcularDanoPersonagem(personagem: PersonagemRPG): number {
+//   // TODO: retorne um valor de dano baseado no nivel e arma
+//   // Guerreiro: nivel * 15
+//   // Arqueiro: nivel * 12  
+//   // Mago: nivel * 10
+// }
+
+// function subirNivel(personagem: PersonagemRPG): void {
+//   // TODO: aumente o nivel em 1 e a vida em 20
+//   // Se for mago, aumente mana em 10
+// }
+
+// function personagemEstaVivo(personagem: PersonagemRPG): boolean {
+//   // TODO: retorne true se vida > 0 e ativo === true
+// }
+
+// =============================================================================
+// 🎮 TESTANDO SEU CÓDIGO (DESCOMENTE PARA TESTAR)
+// =============================================================================
+
+// TODO: Exercício 20 - Teste Final
+// Descomente as linhas abaixo após implementar tudo:
+
+// console.log('🎮 Testando sistema RPG...');
+
+// const heroi1 = criarPersonagemRPG('Aragorn', 'guerreiro');
+// const heroi2 = criarPersonagemRPG('Legolas', 'arqueiro');  
+// const heroi3 = criarPersonagemRPG('Gandalf', 'mago');
+
+// console.log('Personagens criados:');
+// console.log(heroi1);
+// console.log(heroi2);
+// console.log(heroi3);
+
+// console.log('Calculando dano:');
+// console.log(`${heroi1.nome} causa ${calcularDanoPersonagem(heroi1)} de dano`);
+// console.log(`${heroi2.nome} causa ${calcularDanoPersonagem(heroi2)} de dano`);
+// console.log(`${heroi3.nome} causa ${calcularDanoPersonagem(heroi3)} de dano`);
+
+// console.log('Subindo nível...');
+// subirNivel(heroi1);
+// subirNivel(heroi2);
+// subirNivel(heroi3);
+
+// console.log('Status após subir nível:');
+// console.log(`${heroi1.nome} - Nível: ${heroi1.nivel}, Vida: ${heroi1.vida}`);
+// console.log(`${heroi2.nome} - Nível: ${heroi2.nivel}, Vida: ${heroi2.vida}`);
+// console.log(`${heroi3.nome} - Nível: ${heroi3.nivel}, Vida: ${heroi3.vida}, Mana: ${heroi3.mana}`);
+
+// console.log('Todos estão vivos?');
+// console.log(`${heroi1.nome}: ${personagemEstaVivo(heroi1)}`);
+// console.log(`${heroi2.nome}: ${personagemEstaVivo(heroi2)}`);
+// console.log(`${heroi3.nome}: ${personagemEstaVivo(heroi3)}`);
+
+// console.log('Parabéns! Você completou todos os exercícios do Dia 01!');
