@@ -57,6 +57,10 @@ npx nx --version
 # 📊 Ver todos os projetos disponíveis
 npx nx show projects
 
+# 🎯 Executar exemplos dos dias
+npm run exemplos:dia01          # Exemplos do Dia 01 - TypeScript Básico
+npm run exemplos:dia01:watch    # Modo watch (re-executa automaticamente)
+
 # 🏃‍♂️ Executar aplicação específica
 npx nx serve semana-01-anime        # Projeto da Semana 1
 npx nx serve semana-02-gatos        # Projeto da Semana 2  

@@ -2,7 +2,10 @@
   "name": "@jornada-30-dias/source",
   "version": "0.0.0",
   "license": "MIT",
-  "scripts": {},
+  "scripts": {
+    "exemplos:dia01": "cd docs/semana-01/dia-01 && npx ts-node exemplos.ts",
+    "exemplos:dia01:watch": "cd docs/semana-01/dia-01 && npx ts-node --watch exemplos.ts"
+  },
   "private": true,
   "dependencies": {
     "@angular/common": "~20.0.0",
