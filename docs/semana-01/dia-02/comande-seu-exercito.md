@@ -627,33 +627,6 @@ console.log(heroi.atributos); // { forca: 18, agilidade: 12, inteligencia: 8 }
 console.log(heroi.inventario); // ['Espada de Ferro', 'Escudo de Madeira', 'Poção de Vida']
 ```
 
-#### 🔥 Casos de Uso Avançados
-
-```typescript
-class ConexaoBancoDados {
-  private host: string;
-  private porta: number;
-  private conectado: boolean = false;
-
-  constructor(host: string, porta: number = 3306) {
-    this.host = host;
-    this.porta = porta;
-    
-    // 🚀 Conexão automática no constructor
-    this.conectar();
-  }
-
-  private conectar(): void {
-    console.log(`🔌 Conectando em ${this.host}:${this.porta}...`);
-    // Lógica de conexão aqui
-    this.conectado = true;
-    console.log('✅ Conectado com sucesso!');
-  }
-}
-
-// A conexão acontece automaticamente na criação!
-const db = new ConexaoBancoDados('localhost'); // 🔌 Conectando... ✅ Conectado!
-```
 
 #### 💡 Resumo: Por que Constructor é Fundamental?
 
