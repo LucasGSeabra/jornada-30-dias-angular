@@ -4,7 +4,9 @@
   "license": "MIT",
   "scripts": {
     "exemplos:dia01": "cd docs/semana-01/dia-01 && npx ts-node exemplos.ts",
-    "exemplos:dia01:watch": "cd docs/semana-01/dia-01 && npx ts-node --watch exemplos.ts"
+    "exemplos:dia01:watch": "cd docs/semana-01/dia-01 && npx ts-node --watch exemplos.ts",
+    "exemplos:dia02": "cd docs/semana-01/dia-02 && npx ts-node exemplos.ts",
+    "exemplos:dia02:watch": "cd docs/semana-01/dia-02 && npx ts-node --watch exemplos.ts"
   },
   "private": true,
   "dependencies": {
