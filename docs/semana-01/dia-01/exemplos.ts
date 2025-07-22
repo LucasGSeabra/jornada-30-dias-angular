@@ -50,7 +50,7 @@ let ativoExemplo: boolean = true;
 // 2. Atribua qualquer valor a ela
 // 3. Tente chamar um método que não existe (para ver o problema)
 
-// TODO: Exercício 4 - Solução com UNKNOWN  
+// TODO: Exercício 4 - Solução com UNKNOWN
 // 1. Declare uma variável 'dadosSeguro' do tipo unknown
 // 2. Atribua uma string a ela
 // 3. Use type guard para verificar se é string antes de usar métodos de string
@@ -143,7 +143,7 @@ let ativoExemplo: boolean = true;
 // TODO: Exercício 15 - Enum String
 // Crie um enum 'TipoArma' com valores string:
 // - ESPADA = 'espada'
-// - ARCO = 'arco'  
+// - ARCO = 'arco'
 // - CAJADO = 'cajado'
 // - MACHADO = 'machado'
 
@@ -181,7 +181,7 @@ let ativoExemplo: boolean = true;
 //   // TODO: retorne um objeto PersonagemRPG com:
 //   // - id aleatório (Math.floor(Math.random() * 1000))
 //   // - nome recebido por parâmetro
-//   // - classe recebida por parâmetro  
+//   // - classe recebida por parâmetro
 //   // - nivel: 1
 //   // - vida: 100
 //   // - mana: 50 (se for mago), undefined (se não for)
@@ -196,7 +196,7 @@ let ativoExemplo: boolean = true;
 // function calcularDanoPersonagem(personagem: PersonagemRPG): number {
 //   // TODO: retorne um valor de dano baseado no nivel e arma
 //   // Guerreiro: nivel * 15
-//   // Arqueiro: nivel * 12  
+//   // Arqueiro: nivel * 12
 //   // Mago: nivel * 10
 // }
 
@@ -219,7 +219,7 @@ let ativoExemplo: boolean = true;
 // console.log('🎮 Testando sistema RPG...');
 
 // const heroi1 = criarPersonagemRPG('Aragorn', 'guerreiro');
-// const heroi2 = criarPersonagemRPG('Legolas', 'arqueiro');  
+// const heroi2 = criarPersonagemRPG('Legolas', 'arqueiro');
 // const heroi3 = criarPersonagemRPG('Gandalf', 'mago');
 
 // console.log('Personagens criados:');
