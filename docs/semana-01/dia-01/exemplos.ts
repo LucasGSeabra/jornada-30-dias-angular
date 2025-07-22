@@ -32,14 +32,19 @@ let ativoExemplo: boolean = true;
 // - nomeJogador (string) com seu nome
 // - pontosVida (number) iniciando com 100
 // - temEscudo (boolean) iniciando como false
+let nomeJogador: string = 'Lucas Gimenez';
+let pontosVida: number = 100;
+let temEscudo: boolean = false;
 
 // TODO: Exercício 2 - Type Annotation vs Inference
 // Crie duas versões das mesmas variáveis:
 // Version A: Com type annotation explícita
 // let nivelA: number = 1;
+let tamanhoInventario: number = 10;
 
 // Version B: Com type inference (sem tipo explícito)
 // let nivelB = 1;
+let tamanhoInventarioInference = 10;
 
 // =============================================================================
 // ⚠️ ANY vs UNKNOWN - EXERCÍCIOS
@@ -49,8 +54,10 @@ let ativoExemplo: boolean = true;
 // 1. Declare uma variável 'dadosPerigosos' do tipo any
 // 2. Atribua qualquer valor a ela
 // 3. Tente chamar um método que não existe (para ver o problema)
+let dadosPerigosos: any = 10;
+// dadosPerigosos.toUpperCase();
 
-// TODO: Exercício 4 - Solução com UNKNOWN  
+// TODO: Exercício 4 - Solução com UNKNOWN
 // 1. Declare uma variável 'dadosSeguro' do tipo unknown
 // 2. Atribua uma string a ela
 // 3. Use type guard para verificar se é string antes de usar métodos de string
@@ -58,6 +65,10 @@ let ativoExemplo: boolean = true;
 // if (typeof dadosSeguro === 'string') {
 //   console.log(dadosSeguro.toUpperCase());
 // }
+let dadosNemTaoPerigosos: unknown = 'perigo?';
+if (typeof dadosNemTaoPerigosos === 'string') {
+  console.log(dadosNemTaoPerigosos.toUpperCase());
+}
 
 // =============================================================================
 // 🔑 UNION & LITERAL TYPES - EXERCÍCIOS
@@ -68,11 +79,31 @@ let ativoExemplo: boolean = true;
 // 2. Atribua primeiro um valor string, depois um número
 // 3. Crie uma função 'processarIdentificador' que aceita string|number
 //    e usa type guards para tratar cada tipo diferente
+let identificador: string | number;
+let processarIdentificador = (identificador: string | number) => {
+  if (typeof identificador === 'string') {
+    console.log('Ó é string');
+  }
+  if (typeof identificador === 'number') {
+    console.log('Ó é number');
+  }
+};
+
+identificador = 10;
+processarIdentificador(identificador);
+
+identificador = 'Dez';
+processarIdentificador(identificador);
 
 // TODO: Exercício 6 - Literal Types
 // 1. Crie um type 'EstadoJogo' com os valores: 'menu', 'jogando', 'pausado', 'game-over'
 // 2. Crie um type 'DirecaoMovimento' com: 'cima', 'baixo', 'esquerda', 'direita'
 // 3. Declare variáveis usando esses tipos
+type EstadoJogo = 'menu' | 'jogando' | 'pausado' | 'game-over';
+type DirecaoMovimento = 'cima' | 'baixo' | 'esquerda' | 'direita';
+
+let estadoAtual: EstadoJogo = 'jogando';
+let direcaoAtual: DirecaoMovimento = 'direita';
 
 // =============================================================================
 // 🛡️ TYPE ALIAS - EXERCÍCIOS
@@ -84,6 +115,10 @@ let ativoExemplo: boolean = true;
 // type IdadeUsuario = number;
 // type EmailUsuario = string;
 
+type NomeUsuario = string;
+type IdadeUsuario = number;
+type EmailUsuario = string;
+
 // TODO: Exercício 8 - Type Alias para Objetos
 // Crie um type alias 'Heroi' com:
 // - nome: string
@@ -91,10 +126,20 @@ let ativoExemplo: boolean = true;
 // - nivel: number
 // - experiencia: number
 
+type Heroi = {
+  nome: string;
+  classe: 'guerreiro' | 'mago' | 'arqueiro';
+  nivel: number;
+  experiencia: number;
+};
+
 // TODO: Exercício 9 - Type Alias para Funções
 // Crie os seguintes type aliases para funções:
 // type CalcularDano = (ataque: number, defesa: number) => number;
 // type ValidarSenha = (senha: string) => boolean;
+
+type CalcularDano = (ataque: number, defesa: number) => number;
+type ValidarSenha = (senha: string) => boolean;
 
 // TODO: Exercício 10 - Implementar as Funções
 // Implemente as funções usando os type aliases criados acima:
@@ -102,9 +147,18 @@ let ativoExemplo: boolean = true;
 //   // TODO: retorne ataque - defesa, mas nunca menos que 0
 // };
 
+const calcularDano: CalcularDano = (ataque, defesa) => {
+  return ataque - defesa >= 0 ? ataque - defesa : 0;
+};
+
 // const validarSenhaReal: ValidarSenha = (senha) => {
 //   // TODO: retorne true se senha tem pelo menos 6 caracteres
 // };
+
+const validarSenha: ValidarSenha = (senha) => {
+  if (senha.length >= 6) return true;
+  return false;
+};
 
 // =============================================================================
 // 🎯 INTERFACE - EXERCÍCIOS
@@ -117,12 +171,26 @@ let ativoExemplo: boolean = true;
 // - classe: string
 // - ativo: boolean
 
+interface Jogador {
+  nome: string;
+  nivel: number;
+  classe: string;
+  ativo: boolean;
+}
+
 // TODO: Exercício 12 - Interface com Propriedades Opcionais
 // Crie uma interface 'Personagem' com:
 // - nome: string (obrigatório)
 // - vida: number (obrigatório)
 // - mana?: number (opcional)
 // - inventario?: string[] (opcional)
+
+interface Personagem {
+  nome: string;
+  vida: number;
+  mana?: number;
+  inventario?: string[];
+}
 
 // TODO: Exercício 13 - Interface com Readonly
 // Crie uma interface 'Configuracao' com:
@@ -131,10 +199,22 @@ let ativoExemplo: boolean = true;
 // - tema: string
 // - idioma: string
 
+interface Configuracao {
+  readonly id: number;
+  readonly criadoEm: Date;
+  tema: string;
+  idioma: string;
+}
+
 // TODO: Exercício 14 - Herança de Interface
 // Crie uma interface 'PersonagemAvancado' que estende 'Personagem' e adiciona:
 // - habilidades: string[]
 // - experiencia: number
+
+interface PersonagemAvancado extends Personagem {
+  habilidades: string[];
+  experiencia: number;
+}
 
 // =============================================================================
 // 🎯 ENUMS - EXERCÍCIOS
@@ -143,9 +223,16 @@ let ativoExemplo: boolean = true;
 // TODO: Exercício 15 - Enum String
 // Crie um enum 'TipoArma' com valores string:
 // - ESPADA = 'espada'
-// - ARCO = 'arco'  
+// - ARCO = 'arco'
 // - CAJADO = 'cajado'
 // - MACHADO = 'machado'
+
+enum TipoArma {
+  ESPADA = "espada",
+  ARCO = "arco",
+  CAJADO = "cajado",
+  MACHADO = "machado"
+}
 
 // TODO: Exercício 16 - Enum Numérico
 // Crie um enum 'Dificuldade' com valores numéricos:
@@ -153,6 +240,13 @@ let ativoExemplo: boolean = true;
 // - MEDIO = 2
 // - DIFICIL = 3
 // - EXPERT = 4
+
+enum Dificuldade {
+  FACIL = 1,
+  MEDIO = 2,
+  DIFICIL = 3,
+  EXPERT = 4
+}
 
 // =============================================================================
 // 🧙 PROJETO PRÁTICO - SISTEMA RPG
@@ -172,6 +266,18 @@ let ativoExemplo: boolean = true;
 //   ativo: boolean;
 // }
 
+interface PersonagemRPG {
+  readonly id: number;
+  nome: string;
+  classe: "guerreiro" | "mago" | "arqueiro";
+  nivel: number;
+  vida: number;
+  mana?: number;
+  arma: TipoArma;
+  experiencia: number;
+  ativo: boolean;
+}
+
 // TODO: Exercício 18 - Função de Criação
 // Implemente uma função que cria personagens:
 // function criarPersonagemRPG(
@@ -181,7 +287,7 @@ let ativoExemplo: boolean = true;
 //   // TODO: retorne um objeto PersonagemRPG com:
 //   // - id aleatório (Math.floor(Math.random() * 1000))
 //   // - nome recebido por parâmetro
-//   // - classe recebida por parâmetro  
+//   // - classe recebida por parâmetro
 //   // - nivel: 1
 //   // - vida: 100
 //   // - mana: 50 (se for mago), undefined (se não for)
@@ -190,24 +296,63 @@ let ativoExemplo: boolean = true;
 //   // - ativo: true
 // }
 
+const criarPersonagemRPG = (nome: string, classe: PersonagemRPG["classe"]): PersonagemRPG => {
+  const defineArmaInicial = (classe: PersonagemRPG["classe"]): TipoArma => {
+    if(classe === "mago") return TipoArma.CAJADO;
+    if(classe === "arqueiro") return TipoArma.ARCO;
+
+    return TipoArma.ESPADA
+  }
+
+  const personagem: PersonagemRPG = {
+    id: Math.floor(Math.random() * 1000),
+    nome,
+    classe,
+    arma: defineArmaInicial(classe),
+    nivel: 1,
+    vida: 100,
+    mana: classe === "mago" ? 50 : undefined,
+    experiencia: 0,
+    ativo: true
+  }
+
+  return personagem;
+}
+
 // TODO: Exercício 19 - Funções Utilitárias
 // Implemente as seguintes funções:
 
 // function calcularDanoPersonagem(personagem: PersonagemRPG): number {
 //   // TODO: retorne um valor de dano baseado no nivel e arma
 //   // Guerreiro: nivel * 15
-//   // Arqueiro: nivel * 12  
+//   // Arqueiro: nivel * 12
 //   // Mago: nivel * 10
 // }
+const calcularDanoPersonagem = (personagem: PersonagemRPG): number => {
+  if(personagem.classe === "arqueiro") return personagem.nivel * 12;
+
+  if(personagem.classe === "mago") return personagem.nivel * 10;
+
+  return personagem.nivel * 15;
+}
 
 // function subirNivel(personagem: PersonagemRPG): void {
 //   // TODO: aumente o nivel em 1 e a vida em 20
 //   // Se for mago, aumente mana em 10
 // }
+const subirNivel = (personagem: PersonagemRPG): void => {
+  if(personagem.classe === "mago" && personagem.mana) personagem.mana += 10;
+  personagem.nivel += 1;
+  personagem.vida += 20;
 
+}
 // function personagemEstaVivo(personagem: PersonagemRPG): boolean {
 //   // TODO: retorne true se vida > 0 e ativo === true
 // }
+const personagemEstaVivo = (personagem: PersonagemRPG): boolean => {
+  if(personagem.vida > 0 && personagem.ativo === true) return true;
+  return false;
+}
 
 // =============================================================================
 // 🎮 TESTANDO SEU CÓDIGO (DESCOMENTE PARA TESTAR)
@@ -218,33 +363,33 @@ let ativoExemplo: boolean = true;
 
 // console.log('🎮 Testando sistema RPG...');
 
-// const heroi1 = criarPersonagemRPG('Aragorn', 'guerreiro');
-// const heroi2 = criarPersonagemRPG('Legolas', 'arqueiro');  
-// const heroi3 = criarPersonagemRPG('Gandalf', 'mago');
+const heroi1 = criarPersonagemRPG('Aragorn', 'guerreiro');
+const heroi2 = criarPersonagemRPG('Legolas', 'arqueiro');
+const heroi3 = criarPersonagemRPG('Gandalf', 'mago');
 
-// console.log('Personagens criados:');
-// console.log(heroi1);
-// console.log(heroi2);
-// console.log(heroi3);
+console.log('Personagens criados:');
+console.log(heroi1);
+console.log(heroi2);
+console.log(heroi3);
 
-// console.log('Calculando dano:');
-// console.log(`${heroi1.nome} causa ${calcularDanoPersonagem(heroi1)} de dano`);
-// console.log(`${heroi2.nome} causa ${calcularDanoPersonagem(heroi2)} de dano`);
-// console.log(`${heroi3.nome} causa ${calcularDanoPersonagem(heroi3)} de dano`);
+console.log('Calculando dano:');
+console.log(`${heroi1.nome} causa ${calcularDanoPersonagem(heroi1)} de dano`);
+console.log(`${heroi2.nome} causa ${calcularDanoPersonagem(heroi2)} de dano`);
+console.log(`${heroi3.nome} causa ${calcularDanoPersonagem(heroi3)} de dano`);
 
-// console.log('Subindo nível...');
-// subirNivel(heroi1);
-// subirNivel(heroi2);
-// subirNivel(heroi3);
+console.log('Subindo nível...');
+subirNivel(heroi1);
+subirNivel(heroi2);
+subirNivel(heroi3);
 
-// console.log('Status após subir nível:');
-// console.log(`${heroi1.nome} - Nível: ${heroi1.nivel}, Vida: ${heroi1.vida}`);
-// console.log(`${heroi2.nome} - Nível: ${heroi2.nivel}, Vida: ${heroi2.vida}`);
-// console.log(`${heroi3.nome} - Nível: ${heroi3.nivel}, Vida: ${heroi3.vida}, Mana: ${heroi3.mana}`);
+console.log('Status após subir nível:');
+console.log(`${heroi1.nome} - Nível: ${heroi1.nivel}, Vida: ${heroi1.vida}`);
+console.log(`${heroi2.nome} - Nível: ${heroi2.nivel}, Vida: ${heroi2.vida}`);
+console.log(`${heroi3.nome} - Nível: ${heroi3.nivel}, Vida: ${heroi3.vida}, Mana: ${heroi3.mana}`);
 
-// console.log('Todos estão vivos?');
-// console.log(`${heroi1.nome}: ${personagemEstaVivo(heroi1)}`);
-// console.log(`${heroi2.nome}: ${personagemEstaVivo(heroi2)}`);
-// console.log(`${heroi3.nome}: ${personagemEstaVivo(heroi3)}`);
+console.log('Todos estão vivos?');
+console.log(`${heroi1.nome}: ${personagemEstaVivo(heroi1)}`);
+console.log(`${heroi2.nome}: ${personagemEstaVivo(heroi2)}`);
+console.log(`${heroi3.nome}: ${personagemEstaVivo(heroi3)}`);
 
 // console.log('Parabéns! Você completou todos os exercícios do Dia 01!');
