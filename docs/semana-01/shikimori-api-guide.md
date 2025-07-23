@@ -85,54 +85,7 @@
  *     preview: string;
  *     x96: string;
  *     x48: string;
- *   };
- *   url: string;
- *   kind: string;
- *   score: string;
- *   status: string;
- *   episodes: number;
- *   episodes_aired: number;
- *   aired_on: string;
- *   released_on: string;
- *   rating: string;
- *   english: string[];
- *   japanese: string[];
- *   synonyms: string[];
- *   license_name_ru: string;
- *   duration: number;
- *   description: string;
- *   description_html: string;
- *   description_source: string;
- *   franchise: string;
- *   favoured: boolean;
- *   anons: boolean;
- *   ongoing: boolean;
- *   thread_id: number;
- *   topic_id: number;
- *   myanimelist_id: number;
- *   rates_scores_stats: Array<{score: number, name: number}>;
- *   rates_statuses_stats: Array<{name: string, value: number}>;
- *   updated_at: string;
- *   next_episode_at: string;
- *   fansubbers: string[];
- *   fandubbers: string[];
- *   licensors: string[];
- *   genres: ShikimoriGenre[];
- *   studios: ShikimoriStudio[];
- *   videos: ShikimoriVideo[];
- *   screenshots: ShikimoriScreenshot[];
- *   user_rate: ShikimoriUserRate;
- * }
- * ```
- * 
- * ## Casos de Uso Planejados
- * 
- * ### 1. Busca de Animes/Mangas
- * - Busca por nome, gênero, temporada
- * - Filtros avançados (nota, status, tipo)
- * - Paginação de resultados
- * 
- * ### 2. Detalhes Completos
+
  * - Informações detalhadas de anime/manga
  * - Screenshots e vídeos
  * - Personagens e staff

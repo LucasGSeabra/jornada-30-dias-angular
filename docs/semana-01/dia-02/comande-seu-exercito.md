@@ -1299,7 +1299,7 @@ class Comandante {
     const estrategia = this.escolherEstrategia();
     return `${this.nome} planeja: ${estrategia}`;
   }
-}
+}                                                
 
 class General extends Comandante {
   experiencia: number;

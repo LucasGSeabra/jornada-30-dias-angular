@@ -20,8 +20,8 @@
 ## 📋 Cronograma Diário
 
 ### Dia 1 - Configuração do Ambiente
-- [ ] Instalação Node.js e Angular CLI
-- [ ] Configuração do workspace Nx
+- [X] Instalação Node.js e Angular CLI
+- [X] Configuração do workspace Nx
 - [ ] Primeiro componente Angular
 
 ### Dia 2 - Componentes e Templates

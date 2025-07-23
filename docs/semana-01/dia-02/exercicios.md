@@ -25,13 +25,34 @@ class Soldado {
   // - nome: string
   // - vida: number (padrão 100)
   // - ataque: number (padrão 20)
+  nome: string;
+  vida: number;
+  ataque: number;
 
   // Constructor que receba nome e opcionalmente ataque
-  
+  constructor(nome: string, ataque = 20) {
+    this.nome = nome;
+    this.vida = 100;
+    this.ataque = ataque;
+  }
+
   // Métodos:
   // - atacar(): retorna string "Nome ataca com força X!"
   // - estaVivo(): retorna boolean se vida > 0
+
+  public atacar() {
+    return `${this.nome} ataca com forća ${this.forca}` 
+  }
+
+  public estaVivo() {
+    return this.vida > 0 ? true : false
+  }
 }
+
+const soldado1 = new Soldado("Marcus", 25);
+console.log(soldado1.atacar());
+console.log(soldado1.estaVivo());
+
 
 // Teste criando um soldado
 const soldado1 = new Soldado("Marcus", 25);
