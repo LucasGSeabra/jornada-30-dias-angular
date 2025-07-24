@@ -162,6 +162,12 @@ export interface ToastProps extends AlertProps {
  * Interface para propriedades de card
  */
 export interface CardProps extends BaseUIProps {
+  /** Se o card tem título  */
+  title?: string;
+  /** Se o card tem subtitulo  */
+  subtitle?: string;
+  /** Se o card tem imagem  */
+  image?: string;
   /** Se o card tem sombra */
   shadow?: boolean;
   /** Se o card pode ser clicado */
