@@ -1,0 +1,11 @@
+<div class="personagem">
+  <h3>{{ personagem.nome }} (Nível {{ personagem.nivel }})</h3>
+  <p>Experiencia: {{personagem.experiencia | experiencia}}</p>
+  <p
+    *ngIf="personagem.habilidades > 0"
+    *ngFor="let habilidade of personagem.habilidades"
+  >
+    {{habilidade}}
+  </p>
+  <button (click)="atacar()">Atacar</button>
+</div>

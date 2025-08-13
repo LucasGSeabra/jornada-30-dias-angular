@@ -20,13 +20,13 @@
 
 // TODO 1: Interface para personagem
 interface Personagem {
-  id: any; // number
-  nome: any; // string
-  nivel: any; // number
-  classe: any; // string
-  imagem: any; // string (URL)
-  habilidades: any; // string[]
-  experiencia: any; // number
+  id: number; // number
+  nome: string; // string
+  nivel: number; // number
+  classe: string; // string
+  imagem: string; // string (URL)
+  habilidades: string[]; // string[]
+  experiencia: number; // number
 }
 
 // TODO 2: Exemplo de personagem
@@ -45,35 +45,40 @@ const personagemExemplo: Personagem = {
 // =============================================================================
 
 // TODO 3: Função para exibir status do personagem (interpolação)
-function exibirStatus(personagem: any): void {
+function exibirStatus(personagem: Personagem): void {
   // Exemplo:
   // console.log(`Nome: ${personagem.nome} | Classe: ${personagem.classe} | Nível: ${personagem.nivel}`);
+  console.log(
+    `Nome: ${personagem.nome} | Classe: ${personagem.classe} | Nível: ${personagem.nivel}`
+  );
 }
 
 // TODO 4: Função para editar nível do personagem (two-way binding)
-function editarNivel(personagem: any, novoNivel: any): void {
+function editarNivel(personagem: Personagem, novoNivel: number): void {
   // Exemplo:
   // personagem.nivel = novoNivel;
+  personagem.nivel = novoNivel;
 }
 
 // TODO 5: Função para atacar (event binding)
-function atacar(personagem: any): void {
+function atacar(personagem: Personagem): void {
   // Exemplo:
   // console.log(`${personagem.nome} atacou!`);
+  console.log(`${personagem.nome} atacou!`);
 }
 
 // TODO 6: Função para formatar experiência (pipe)
-function formatarExperiencia(exp: any): string {
+function formatarExperiencia(exp: number): string {
   // Exemplo:
   // return exp.toLocaleString();
-  return '';
+  return exp.toLocaleString();
 }
 
 // TODO 7: Função para mostrar "Herói Lendário" (diretiva ngIf)
-function mostrarHeroiLendario(personagem: any): boolean {
+function mostrarHeroiLendario(personagem: Personagem): boolean {
   // Exemplo:
   // return personagem.nivel > 40;
-  return false;
+  return personagem.nivel > 40;
 }
 
 // =============================================================================
@@ -87,11 +92,17 @@ function executarTestes(): void {
   // TODO: Testar atacar
   // TODO: Testar formatarExperiencia
   // TODO: Testar mostrarHeroiLendario
+  exibirStatus(personagemExemplo);
+  editarNivel(personagemExemplo, 20);
+  atacar(personagemExemplo);
+  formatarExperiencia(10);
+  mostrarHeroiLendario(personagemExemplo);
+
   console.log('✅ Testes concluídos!');
 }
 
 // 🔥 Descomente para executar os testes:
-// executarTestes();
+executarTestes();
 
 export {
   Personagem,

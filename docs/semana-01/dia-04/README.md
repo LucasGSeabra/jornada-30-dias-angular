@@ -1208,7 +1208,7 @@ Imagina um sistema de combate em um RPG. Você não pode simplesmente começar a
 
 ### 🏰 **Sem Lifecycle Hooks = Caos na Guild:**
 
-\\\	ypescript
+\\\	typescript
 // ❌ SEM lifecycle hooks (Guild em CAOS!)
 export class GuildChatComponent {
   mensagens: MensagemGuild[] = [];

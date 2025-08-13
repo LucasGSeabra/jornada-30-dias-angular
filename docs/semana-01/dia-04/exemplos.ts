@@ -23,12 +23,12 @@ console.log('🎯 === QUIZ DE REVISÃO TYPESCRIPT ===');
 // TODO 1: Interface para perguntas do quiz
 interface PerguntaQuiz {
   // TODO: Definir estrutura da pergunta
-  id: any; // 🔧 Substitua 'any' pelo tipo correto (number)
-  pergunta: any; // 🔧 Substitua 'any' pelo tipo correto (string)
-  opcoes: any; // 🔧 Array de strings
-  respostaCorreta: any; // 🔧 Índice da resposta correta (number)
-  explicacao: any; // 🔧 Explicação da resposta (string)
-  categoria: any; // 🔧 Union type: 'tipos' | 'classes' | 'generics' | 'utility-types'
+  id: number; // 🔧 Substitua 'any' pelo tipo correto (number)
+  pergunta: string; // 🔧 Substitua 'any' pelo tipo correto (string)
+  opcoes: string[]; // 🔧 Array de strings
+  respostaCorreta: number; // 🔧 Índice da resposta correta (number)
+  explicacao: string; // 🔧 Explicação da resposta (string)
+  categoria: 'tipos' | 'classes' | 'generics' | 'utility-types'; // 🔧 Union type: 'tipos' | 'classes' | 'generics' | 'utility-types'
 }
 
 // TODO 2: Exemplos de perguntas do quiz
@@ -47,6 +47,34 @@ const perguntasRevisao: PerguntaQuiz[] = [
       "'unknown' é type-safe e requer verificação de tipo antes do uso, enquanto 'any' desabilita completamente a verificação de tipos.",
     categoria: 'tipos',
   },
+  {
+    id: 2,
+    pergunta: 'Qual a função de Required<T>?',
+    opcoes: [
+      'constrói um tipo apenas com as propriedades obrigatórias de T',
+      'faz com que as propiedades obrigatórias de T se tornem opcionais',
+      'cria um tipo igual a T mas com todas as propriedades sendo obrigatórias',
+      'transforma as propriedades de T em somente leitura',
+    ],
+    respostaCorreta: 2,
+    explicacao:
+      "'Required' constrói um novo tipo com as mesmas propriedades do tipo T fornecido, mas todas elas são obrigatórias.",
+    categoria: 'utility-types',
+  },
+  {
+    id: 3,
+    pergunta: 'Qual a utilidade da palavra super em uma classe?',
+    opcoes: [
+      'acessar a classe pai',
+      'subscrever métodos da classe pai',
+      'priorizar a execução de métodos da classe filho sobre os métodos da classe pai',
+      'nenhuma das anteriores',
+    ],
+    respostaCorreta: 0,
+    explicacao:
+      'A palavra-chave super é utilizada sempre que é necessário acessar a classe pai de uma classe.',
+    categoria: 'classes',
+  },
   // TODO: Adicione mais perguntas sobre:
   // - Interfaces vs Types
   // - Classes e herança
@@ -64,8 +92,7 @@ class GerenciadorQuiz {
 
   // TODO: Implementar método para obter pergunta atual
   obterPerguntaAtual(): PerguntaQuiz | null {
-    // TODO: Retornar pergunta atual ou null se acabaram
-    return null; // placeholder
+    return perguntasRevisao[this.perguntaAtual]; // placeholder
   }
 
   // TODO: Implementar método para responder pergunta
@@ -74,19 +101,36 @@ class GerenciadorQuiz {
     // TODO: Atualizar pontuação
     // TODO: Armazenar resposta do usuário
     // TODO: Avançar para próxima pergunta
-    return false; // placeholder
+    const pergunta = perguntasRevisao[this.perguntaAtual];
+    this.respostasUsuario.push(resposta);
+    this.perguntaAtual++;
+    if (pergunta.respostaCorreta === resposta) {
+      this.pontuacao++;
+      return true;
+    } else {
+      return false;
+    }
   }
 
   // TODO: Implementar método para calcular resultado
   obterResultadoFinal(): { pontos: number; percentual: number; nivel: string } {
     // TODO: Calcular percentual de acertos
     // TODO: Determinar nível (Iniciante, Intermediário, Avançado, Expert)
-    return { pontos: 0, percentual: 0, nivel: 'Iniciante' }; // placeholder
+    const percentual = (this.pontuacao / this.respostasUsuario.length) * 100;
+    let nivel: string = '';
+    if (percentual <= 25) nivel = 'Iniciante';
+    if (percentual <= 50) nivel = 'Intermediário';
+    if (percentual <= 75) nivel = 'Avançado';
+    if (percentual > 75) nivel = 'Expert';
+
+    return { pontos: this.pontuacao, percentual: percentual, nivel }; // placeholder
   }
 
   // TODO: Implementar método para reiniciar quiz
   reiniciarQuiz(): void {
-    // TODO: Resetar estado do quiz
+    this.pontuacao = 0;
+    this.perguntaAtual = 0;
+    this.respostasUsuario = [];
   }
 }
 
@@ -97,16 +141,22 @@ class GerenciadorQuiz {
 // Revisão Dia 01 - Tipos Básicos
 // TODO 4: Complete os tipos básicos
 interface JogadorInfo {
-  id: any; // 🔧 number
-  nome: any; // 🔧 string
-  nivel: any; // 🔧 number
-  ativo: any; // 🔧 boolean
-  habilidades: any; // 🔧 string[]
-  posicao: any; // 🔧 [number, number] (tupla)
+  id: number; // 🔧 number
+  nome: string; // 🔧 string/
+  nivel: number; // 🔧 number
+  ativo: boolean; // 🔧 boolean
+  habilidades: string[]; // 🔧 string[]
+  posicao: [number, number]; // 🔧 [number, number] (tupla)
 }
 
 // TODO 5: Enum para tipos de dados
-enum TipoDado {}
+enum TipoDado {
+  STRING = 'STRING',
+  NUMBER = 'NUMBER',
+  BOOLEAN = 'BOOLEAN',
+  ARRAY = 'ARRAY',
+  OBJECT = 'OBJECT',
+}
 // TODO: Adicionar tipos: STRING, NUMBER, BOOLEAN, ARRAY, OBJECT
 
 // Revisão Dia 02 - Classes e OOP
@@ -115,19 +165,64 @@ class PersonagemBase {
   // TODO: Implementar constructor com propriedades públicas/privadas
   // TODO: Implementar getter/setter
   // TODO: Implementar método virtual
+  protected hitPoints: number;
+  nome: string;
+  ataque: number;
+  defesa: number;
+
+  constructor(nome: string) {
+    this.hitPoints = 50;
+    this.nome = nome;
+    this.ataque = 10;
+    this.defesa = 5;
+  }
+
+  get getHitPoints(): number {
+    return this.hitPoints;
+  }
+
+  set recuperarHitPoints(cura: number) {
+    this.hitPoints += cura;
+  }
+
+  set tomarDano(dano: number) {
+    this.hitPoints -= dano;
+  }
+
+  subirDeNivel(): void {
+    this.hitPoints = 80;
+    this.ataque = 20;
+    this.defesa = 10;
+  }
 }
 
 class Guerreiro extends PersonagemBase {
   // TODO: Implementar herança
   // TODO: Override de métodos
   // TODO: Propriedades específicas
+  reducaoDeDano: number;
+
+  constructor(nome: string) {
+    super(nome);
+    this.reducaoDeDano = 0.9;
+  }
+
+  subirDeNivel(): void {
+    this.hitPoints = 100;
+    this.ataque = 30;
+    this.defesa = 15;
+    this.reducaoDeDano = 0.8;
+  }
+
+  set tomarDano(dano: number) {
+    this.hitPoints -= dano * this.reducaoDeDano;
+  }
 }
 
 // Revisão Dia 03 - Generics e Utility Types
 // TODO 7: Função genérica
-function criarColecao<T>(/* TODO: parâmetros */): T[] {
-  // TODO: Implementar função genérica
-  return []; // placeholder
+function criarColecao<T>(item: T): T[] {
+  return [item];
 }
 
 // TODO 8: Utility Types Review
@@ -140,9 +235,9 @@ interface Usuario {
 }
 
 // TODO: Implementar utility types
-type UsuarioSemSenha = any; // 🔧 Use Omit<Usuario, 'senha'>
-type UsuarioOpcional = any; // 🔧 Use Partial<Usuario>
-type ApenasIdENome = any; // 🔧 Use Pick<Usuario, 'id' | 'nome'>
+type UsuarioSemSenha = Omit<Usuario, 'senha'>; // 🔧 Use Omit<Usuario, 'senha'>
+type UsuarioOpcional = Partial<Usuario>; // 🔧 Use Partial<Usuario>
+type ApenasIdENome = Pick<Usuario, 'id' | 'nome'>; // 🔧 Use Pick<Usuario, 'id' | 'nome'>
 
 // =============================================================================
 // � SEÇÃO 3: PREPARAÇÃO PARA ANGULAR
@@ -161,6 +256,12 @@ interface ComponenteAngular {
 }
 
 // TODO 10: Implementar simulação de componente
+type DadosQuiz = {
+  titulo: string;
+  perguntaAtual: number | null;
+  pontuacao: number;
+};
+
 class QuizComponenteSimulado implements ComponenteAngular {
   // TODO: Implementar propriedades
   template = `
@@ -170,12 +271,9 @@ class QuizComponenteSimulado implements ComponenteAngular {
     </div>
   `;
 
-  estilos = [
-    '.quiz-container { padding: 20px; }',
-    // TODO: Adicionar mais estilos
-  ];
+  estilos = ['.quiz-container { padding: 20px; }', '.h1 {font-size 18px}'];
 
-  dados = {
+  dados: DadosQuiz = {
     titulo: 'Quiz de Revisão TypeScript',
     perguntaAtual: null,
     pontuacao: 0,
@@ -184,24 +282,33 @@ class QuizComponenteSimulado implements ComponenteAngular {
   // TODO: Implementar ngOnInit
   ngOnInit(): void {
     console.log('Componente inicializado!');
-    // TODO: Inicializar dados do quiz
+    this.dados = {
+      titulo: 'O que corre de pé e dorme deitado',
+      perguntaAtual: 0,
+      pontuacao: 0,
+    };
   }
 
   // TODO: Implementar ngOnDestroy
   ngOnDestroy(): void {
     console.log('Componente destruído!');
-    // TODO: Limpar recursos
+    this.dados = {
+      titulo: 'Quiz de Revisao TypeScript',
+      perguntaAtual: null,
+      pontuacao: 0,
+    };
   }
 
   // TODO: Simular event binding
   onRespostaClick(resposta: number): void {
-    // TODO: Lógica quando usuário clica em uma resposta
+    if (resposta > 1) this.dados.pontuacao += 1;
+    if (this.dados.perguntaAtual !== null) this.dados.perguntaAtual += 1;
   }
 
   // TODO: Simular property binding
   get perguntaTexto(): string {
     // TODO: Retornar texto da pergunta atual
-    return '';
+    return this.dados.titulo;
   }
 }
 
@@ -217,15 +324,15 @@ function executarTestes(): void {
   // TODO: Testar o quiz
   console.log('📝 Testando Quiz...');
   console.log('🎯 Pergunta exemplo do quiz:');
-  // if (perguntasRevisao.length > 0) {
-  //   const pergunta = perguntasRevisao[0];
-  //   console.log(`   ${pergunta.pergunta}`);
-  //   pergunta.opcoes.forEach((opcao: any, index: any) => {
-  //     console.log(`   ${index + 1}. ${opcao}`);
-  //   });
-  //   console.log(`   ✅ Resposta correta: ${pergunta.opcoes[pergunta.respostaCorreta]}`);
-  //   console.log(`   💡 Explicação: ${pergunta.explicacao}`);
-  // }
+  if (perguntasRevisao.length > 0) {
+    const pergunta = perguntasRevisao[0];
+    console.log(`   ${pergunta.pergunta}`);
+    pergunta.opcoes.forEach((opcao: any, index: any) => {
+      console.log(`   ${index + 1}. ${opcao}`);
+    });
+    console.log(`   ✅ Resposta correta: ${pergunta.opcoes[pergunta.respostaCorreta]}`);
+    console.log(`   💡 Explicação: ${pergunta.explicacao}`);
+  }
   console.log('   🚧 TODO: Implemente a interface PerguntaQuiz primeiro!');
   console.log('');
 
@@ -355,7 +462,7 @@ function executarTestes(): void {
 */
 console.log('🎯 === INICIANDO TESTES ===');
 // 🔥 Descomente para executar os testes:
-// executarTestes();
+executarTestes();
 
 export {
   PerguntaQuiz,

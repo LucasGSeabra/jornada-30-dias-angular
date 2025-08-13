@@ -87,7 +87,7 @@ Exibe dados do component no template (como uma "barra de vida"):
 
 ```html
 <!-- Template (personagem.component.html) -->
-<div class="personagem-card">
+<div class="personagem-card">                                                                                                  
   <h2>🏷️ {{ nome }} - {{ classe }}</h2>
   <div class="status">
     <p>❤️ Vida: {{ vida }}/100</p>
